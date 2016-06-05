@@ -48,8 +48,7 @@ pkg
 # For rubinius:
 #*.rbc
 
-/log
-/log/*
+/log/*.log
 /pids
 /pids/*
 /tmp/*

@@ -41,7 +41,7 @@ describe GitRepoFileImportWorker do
         expect( Project.count ).to eq(0)
         GitRepoFileImportProducer.new("github:::#{user.username}:::#{git_repo.fullname}:::Gemfile:::master")
         sleep 7
-        expect( Project.count ).to eq(2)
+        expect( Project.count ).to eq(1)
         expect( Project.first.name ).to eq('veye1test/docker_web_ui')
         expect( Project.first.language ).to eq(Product::A_LANGUAGE_RUBY)
 

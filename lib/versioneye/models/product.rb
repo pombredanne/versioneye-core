@@ -302,6 +302,10 @@ class Product < Versioneye::Model
     version_obj.security_vulnerabilities
   end
 
+  def security_vulnerabilities_all
+    SecurityVulnerability.where(:language => self.language, :prod_key => self.prod_key)
+  end
+
   def update_in_my_products array_of_product_ids
     self.in_my_products = array_of_product_ids.include?(_id.to_s)
   end

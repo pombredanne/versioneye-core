@@ -42,6 +42,7 @@ class ProjectUpdateService < Versioneye::Service
       update_single child_project, send_email
     end
     ProjectService.update_sums( project )
+    reset_badge project.ids
     project
   rescue => e
     log.error e.message
@@ -56,6 +57,7 @@ class ProjectUpdateService < Versioneye::Service
     project.parsing_errors = []
     updater = UpdateStrategy.updater_for project.source
     updater.update project, send_email
+    reset_badge project.ids
     project
   rescue => e
     log.error e.message
@@ -83,6 +85,13 @@ class ProjectUpdateService < Versioneye::Service
 
 
   private
+
+    def self.reset_badge id
+      cache.delete( id )
+      cache.delete( "#{id}__flat" )
+      Badge.where( :key => id.to_s ).delete
+      Badge.where( :key => "#{id}__flat" ).delete
+    end
 
 
     def self.update_numbers project

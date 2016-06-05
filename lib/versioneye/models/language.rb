@@ -20,6 +20,7 @@ class Language < Versioneye::Model
   field :irc_url        , type: String
   field :irc            , type: String
   field :twitter_name   , type: String
+  field :links          , type: Hash
 
   scope :by_language, ->(lang){where(name: Product.decode_language(lang))}
 

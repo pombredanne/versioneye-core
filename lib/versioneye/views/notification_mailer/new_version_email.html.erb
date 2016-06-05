@@ -26,7 +26,7 @@
           <% product_title += ":#{version.to_s}" unless version.to_s.empty? %>
           <% product_title += " (#{product.license_info})" unless product.license_info.to_s.empty? %>
 
-          <a href="<%= product_url %>?utm_medium=email&amp;utm_source=new_versoin">
+          <a href="<%= product_url %>?utm_medium=email&amp;utm_source=new_version">
             <%= product_title %>
           </a>
           <% if !version.tested_runtimes.to_s.empty? %>
@@ -55,5 +55,5 @@
 </p>
 <p>
   Your VersionEye Team<br/>
-  <a href="<%= Settings.instance.server_url %>?utm_medium=email&amp;utm_source=new_versoin"><%= Settings.instance.server_url %></a>
+  <a href="<%= Settings.instance.server_url %>?utm_medium=email&amp;utm_source=new_version"><%= Settings.instance.server_url %></a>
 </p>

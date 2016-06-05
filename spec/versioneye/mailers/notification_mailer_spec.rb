@@ -22,7 +22,7 @@ describe NotificationMailer do
       email.encoded.should include( "Hello #{user.fullname}" )
       email.encoded.should include( 'There are new releases out there' )
       email.encoded.should include( '?utm_medium=email' )
-      email.encoded.should include( 'utm_source=new_versoin' )
+      email.encoded.should include( 'utm_source=new_version' )
       email.encoded.should include( product.name )
       email.encoded.should include( notification.version_id )
       email.encoded.should include( "/user/projects/#{project._id.to_s}" )

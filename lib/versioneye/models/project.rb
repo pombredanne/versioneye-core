@@ -113,7 +113,8 @@ class Project < Versioneye::Model
   end
 
   def parent
-    Project.find parent_id
+    return Project.find(parent_id) if parent_id
+    return nil
   end
 
   def children
@@ -300,6 +301,7 @@ class Project < Versioneye::Model
     if new_project.s3_filename
       self.s3_filename  = new_project.s3_filename
     end
+    self.updated_at = Time.now
 
     self.overwrite_dependencies( new_project.projectdependencies )
 

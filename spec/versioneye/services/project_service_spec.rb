@@ -216,6 +216,9 @@ describe ProjectService do
       described_class.type_by_filename("app/Gemfile/new.html").should be_nil
       described_class.type_by_filename("app/Gemfile.lock/new").should be_nil
     end
+    it "returns nil for wrong CMakeLists.txt. OK" do
+      described_class.type_by_filename("CMakeLists.txt").should be_nil
+    end
 
     it "returns Composer. OK" do
       url1 = "http://localhost:4567/veye_dev_projects/i5lSWS951IxJjU1rurMg_composer.json?AWSAccessKeyId=123&Expires=1360525084&Signature=HRPsn%2Bai%2BoSjm8zqwZFRtzxJvvE%3D"
@@ -635,9 +638,9 @@ describe ProjectService do
       prod_1 = ProductFactory.create_new 1
       dep_1  = ProjectdependencyFactory.create_new project, prod_1, true, {:version_requested => '1.0.0'}
 
-      Project.count.should == 1
-      ProjectService.destroy_by( user, project.ids ).should be_truthy
-      Project.count.should == 0
+      expect( Project.count ).to eq(1)
+      ProjectService.destroy_by( user, project.ids )
+      expect( Project.count ).to eq(0)
     end
 
     it 'throws exeception because user has no right to delete project.' do
